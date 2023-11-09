@@ -27,7 +27,7 @@ public class SpawnBalls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log("wa wa" + ((Time.time - offset)));
+        Debug.Log(Time.time - offset);
         if ((Time.time - offset) - justSpawned > timeToSpawn && readyToSpawn)
         {
             GameObject temp = Instantiate(ballPrefab, spawner[Random.Range(0,4)].transform.position, Quaternion.identity, ballManager.transform);
@@ -39,7 +39,19 @@ public class SpawnBalls : MonoBehaviour
 
     public void StartGame()
     {
-        ToggleReadyToSpawn(true);
+        
         offset = Time.time;
+
+        ToggleReadyToSpawn(true);
+    }
+
+    public void StopGame()
+    {
+        ToggleReadyToSpawn(false);
+
+        foreach (Transform child in ballManager.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

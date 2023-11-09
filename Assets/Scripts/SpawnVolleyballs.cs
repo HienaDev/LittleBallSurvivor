@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpawnVolleyballs : Game
+public class SpawnVolleyballs : MonoBehaviour
 {
 
     private bool readyToSpawn = true;
@@ -34,10 +34,6 @@ public class SpawnVolleyballs : Game
 
     public void ToggleReadyToSpawn(bool toggle) => readyToSpawn = toggle;
 
-    public override void Reset()
-    {
-        readyToSpawn = false;
-    }
 }
 
 

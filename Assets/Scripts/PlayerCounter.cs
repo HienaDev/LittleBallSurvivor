@@ -20,16 +20,13 @@ public class PlayerCounter : MonoBehaviour
 
     public int NrOfPlayers { get; private set; }
 
-    [SerializeField] private PlayerCountUI playerCountUI;
-
     [SerializeField] private GameObject hyenaUI;
     [SerializeField] private GameObject bunnyUI;
     [SerializeField] private GameObject batUI;
     [SerializeField] private GameObject penguinUI;
 
-    //[SerializeField] private TMP_Text ;
 
-
+    private int playerNumber = 1;
 
     // Update is called once per frame
     void Update()
@@ -41,7 +38,14 @@ public class PlayerCounter : MonoBehaviour
 
             hyenaUI.SetActive(true);
 
-            playerList.Add(Instantiate(player1Prefab, gameObject.transform));
+            GameObject player = Instantiate(player1Prefab, gameObject.transform);
+
+            playerList.Add(player);
+
+            player.GetComponent<PointsLogic>().GivePlayerNr(playerNumber);
+            playerNumber++;
+
+  
         }
 
         if (Input.GetKeyDown(KeyCode.I) && !player2Here)
@@ -52,7 +56,12 @@ public class PlayerCounter : MonoBehaviour
 
             bunnyUI.SetActive(true);
 
-            playerList.Add(Instantiate(player2Prefab, gameObject.transform));
+            GameObject player = Instantiate(player2Prefab, gameObject.transform);
+
+            playerList.Add(player);
+
+            player.GetComponent<PointsLogic>().GivePlayerNr(playerNumber);
+            playerNumber++;
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && !player3Here)
@@ -63,7 +72,12 @@ public class PlayerCounter : MonoBehaviour
 
             batUI.SetActive(true);
 
-            playerList.Add(Instantiate(player3Prefab, gameObject.transform));
+            GameObject player = Instantiate(player3Prefab, gameObject.transform);
+
+            playerList.Add(player);
+
+            player.GetComponent<PointsLogic>().GivePlayerNr(playerNumber);
+            playerNumber++;
         }
 
         if (Input.GetKeyDown(KeyCode.Keypad8) && !player4Here)
@@ -74,7 +88,12 @@ public class PlayerCounter : MonoBehaviour
 
             penguinUI.SetActive(true);
 
-            playerList.Add(Instantiate(player4Prefab, gameObject.transform));
+            GameObject player = Instantiate(player4Prefab, gameObject.transform);
+
+            playerList.Add(player);
+
+            player.GetComponent<PointsLogic>().GivePlayerNr(playerNumber);
+            playerNumber++;
         }
     }
 
@@ -82,7 +101,6 @@ public class PlayerCounter : MonoBehaviour
     {
        
         NrOfPlayers += 1;
-        playerCountUI.ChangeCounterUI(NrOfPlayers);
 
     }
 
@@ -103,4 +121,6 @@ public class PlayerCounter : MonoBehaviour
                 player.SetActive(true);
         }
     }
+
+    public List<GameObject> GetPlayerList() => playerList;
 }

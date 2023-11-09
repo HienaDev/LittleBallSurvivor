@@ -19,4 +19,9 @@ public class DetectPlayerDeath : MonoBehaviour
             gameObject.SetActive(false);
         }
     }
+
+    private void OnDisable()
+    {
+        
+    }
 }

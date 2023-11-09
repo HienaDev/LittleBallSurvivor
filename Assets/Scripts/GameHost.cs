@@ -7,16 +7,14 @@ using UnityEngine.SceneManagement;
 public class GameHost : MonoBehaviour
 {
 
-    [SerializeField] private Scene[] games;
+    [SerializeField] private string[] games;
 
     [SerializeField] private GameObject menuUI;
-    [SerializeField] private GameObject floorCollider;
-    [SerializeField] private GameObject menuCollider;
     [SerializeField] private GameObject pressurePlate;
 
-    [SerializeField] private UnityEvent timerStartGame;
+    //[SerializeField] private UnityEvent timerStartGame;
 
-    private Scene game;
+    private string game;
 
     public bool GameRunning { get; private set; }
 
@@ -32,35 +30,15 @@ public class GameHost : MonoBehaviour
         Debug.Log(games);
     }
 
-    public void TriggerRandomGame()
+    public void GameRunningToggle(bool toggle) => GameRunning = toggle;
+
+    public void StartRandomGame()
     {
-        menuUI.SetActive(false);
-        menuCollider.SetActive(false);
-        pressurePlate.SetActive(false);
-
-        
-        floorCollider.SetActive(true);
-
-
-
-        timerStartGame.Invoke();
-
-        //Timer.SetTimerOffset(Time.time);
-
-
 
         game = games[Random.Range(0, games.Length)];
 
-    }
 
-    public void GameRunningToggle(bool toggle) => GameRunning = toggle;
-
-    public void StartGame()
-    {
-
-        Timer.SetTimerOffset(Time.time);
-
-        SceneManager.LoadScene(game.name);
+        SceneManager.LoadScene(game);
     }
 
 
